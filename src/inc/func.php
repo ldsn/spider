@@ -20,7 +20,7 @@ function findurl($keywords){
             $site_url = isset($matches[2])?$matches[2]:null;
             if($site_url){
                 $page_content = getpage($site_url);
-                $result[] = array('keyword'=>$v,'url'=>$site_url,'content'=>$page_content);
+                $result[] = array('page'=>$i/10,'keyword'=>$v,'url'=>$site_url);
                 break;
             } else {
                 $i+=10;
