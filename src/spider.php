@@ -6,4 +6,4 @@ $str = '鲁东大学,鲁大学生网,鲁东大学学生网,鲁东大学吧,鲁�
 $keywords = explode(',', $str);
 $result = findurl($keywords);
 
-file_put_contents('tmp/log_'.time().'.log', var_export($result,true));
+file_put_contents('tmp/log_'.date('YmdHis',time()).'.log', var_export($result,true));
