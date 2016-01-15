@@ -1,28 +1,9 @@
 #!/usr/bin/php
 <?php
 include_once 'inc/func.php';
-$keywords = array('鲁东大学吧');
-$find = '鲁大学生网';
 
-$url_tmpl = "http://www.baidu.com/s?word=%s&pn=%d";
+$str = '鲁东大学,鲁大学生网,鲁东大学学生网,鲁东大学吧,鲁东大学论坛,鲁东大学怎么样,鲁东大学首页,鲁东大学考研,鲁东大学教务信息网,鲁东大学图书馆,鲁东大学研究生处,鲁东大学分数线,烟台大学,烟台论坛';
+$keywords = explode(',', $str);
+$result = findurl($keywords);
 
-$result = array();
-foreach($keywords as $k=>$v){
-    $i = 0;
-    while($i<=1000) {
-        $url = sprintf($url_tmpl, urlencode($v), $i);
-        $contents = getpage($url);
-        $contents = trimall($contents);
-        $pattern = '/title":"'.$find.'(.*?)url":"(.*?)"/si';
-        preg_match($pattern, $contents, $matches);
-        $site_url = isset($matches[2])?$matches[2]:null;
-        if($site_url){
-            $result[] = array('keyword'=>$v,'url'=>$site_url);
-            break;
-        } else {
-            $i+=10;
-        }
-    }
-}
-
-var_dump($result);
+file_put_contents('tmp/log_'.time().'.log', var_export($result,true));
